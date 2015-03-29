@@ -16,12 +16,14 @@
 'use strict';
 
 var React = require('react-native');
-var My = require('./My');
+var Account = require('./Account');
 var Cart = require('./Cart');
-var Index = require('./Index');
+var Home = require('./Home');
+var Discover = require('./Discover');
 
 var {
   StyleSheet,
+  Image,
   TabBarIOS,
   Text,
   View,
@@ -32,35 +34,52 @@ var TaoApp = React.createClass({
 
   getInitialState: function() {
     return {
-      selectedTab: 'index',
+      selectedTab: 'home',
       notifCount: 0
     };
   },
 
   render: function() {
+
     return (
       <TabBarIOS
         selectedTab={this.state.selectedTab}>
 
         <TabBarItemIOS
-          name="index"
-          icon={{uri: './Chrome.png'}}
+          name="home"
+          icon={require('image!home')}
           title='首页'
           accessibilityLabel="首页"
-          selected={this.state.selectedTab === 'index'}
+          selected={this.state.selectedTab === 'home'}
           onPress={() => {
             this.setState({
-              selectedTab: 'index'
+              selectedTab: 'home'
             });
           }}>
-          <Index/>
+          <Home/>
+        </TabBarItemIOS>
+          
+        <TabBarItemIOS
+          accessibilityLabel="发现"
+          name="discover"
+          icon={require('image!discover')}
+          title='发现'
+          badgeValue={this.state.notifCount ? String(this.state.notifCount) : null}
+          selected={this.state.selectedTab === 'discover'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'discover',
+              notifCount: this.state.notifCount,
+            });
+          }}>
+          <Discover/>
         </TabBarItemIOS>
 
         <TabBarItemIOS
           accessibilityLabel="购物车"
           name="cart"
-          icon={{uri: './Chrome.png'}}
-          title='首页'
+          icon={require('image!cart')}
+          title='购物车'
           badgeValue={this.state.notifCount ? String(this.state.notifCount) : null}
           selected={this.state.selectedTab === 'cart'}
           onPress={() => {
@@ -72,18 +91,19 @@ var TaoApp = React.createClass({
           <Cart/>
         </TabBarItemIOS>
 
+
         <TabBarItemIOS
-          name="my"
-          icon={{uri: './Chrome.png'}}
-          title='首页'
+          name="account"
+          icon={require('image!account')}
+          title='我的淘宝'
           accessibilityLabel="我的淘宝"
-          selected={this.state.selectedTab === 'my'}
+          selected={this.state.selectedTab === 'account'}
           onPress={() => {
             this.setState({
-              selectedTab: 'my'
+              selectedTab: 'account'
             });
           }}>
-          <My/>
+          <Account/>
         </TabBarItemIOS>
       </TabBarIOS>
     );
@@ -99,6 +119,10 @@ var styles = StyleSheet.create({
   tabText: {
     color: 'white',
     margin: 50,
+  },
+  img: {
+    width: 64,
+    height: 64,
   },
 });
 

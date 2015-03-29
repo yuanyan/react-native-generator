@@ -16,31 +16,25 @@
 'use strict';
 
 var React = require('react-native');
+
+var Carousel = require('./Carousel')
 var {
   StyleSheet,
   Text,
+  Image,
   View,
 } = React;
 
-module.exports = React.createClass({
 
+module.exports = React.createClass({
   render: function() {
     return (
-      <View style={[styles.tabContent]}>
-        <Text style={styles.tabText}>My</Text>
-      </View>
+        <Carousel style={{flex:1}} width={375} indicatorColor="#ffffff">
+            <Image style={{flex:1}} source={{uri: 'http://gw.alicdn.com/tps/i4/TB1qsfTHpXXXXbVXpXXdIns_XXX-1125-352.jpg_q50.jpg'}}/>
+            <Image style={{flex:1}} source={{uri: 'http://gw.alicdn.com/tps/i3/TB1UEnJHpXXXXXsaXXXdIns_XXX-1125-352.jpg_q50.jpg'}}/>
+            <Image style={{flex:1}} source={{uri: 'http://gw.alicdn.com/tps/i1/TB1vljRHpXXXXcjXXXXdIns_XXX-1125-352.jpg_q50.jpg'}}/>
+            <Image style={{flex:1}} source={{uri: 'http://gw.alicdn.com/tps/i2/TB1TOPKHpXXXXbhXVXXdIns_XXX-1125-352.jpg_q50.jpg'}}/>
+        </Carousel>
     );
-  },
-
-});
-
-var styles = StyleSheet.create({
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: 'white',
-    margin: 50,
-  },
+  }
 });

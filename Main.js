@@ -6,4 +6,4 @@
 var React = require('react-native');
 var App = require('./App');
 
-React.AppRegistry.registerComponent('Tao', () => App);
+React.AppRegistry.registerComponent('App', () => App);
