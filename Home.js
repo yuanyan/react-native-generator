@@ -59,8 +59,8 @@ module.exports = React.createClass({
             'http://gw.alicdn.com/tps/i1/TB1vljRHpXXXXcjXXXXdIns_XXX-1125-352.jpg_q50.jpg',
             'http://gw.alicdn.com/tps/i2/TB1TOPKHpXXXXbhXVXXdIns_XXX-1125-352.jpg_q50.jpg'
         ].map(function(uri, i){
-                return  <Image key={i} style={styles.page} source={{uri: uri}}/>
-         });
+            return <Image key={i} style={styles.page} source={{uri: uri}}/>
+        });
 
         return <View style={{height: 120}}>
             <Carousel>

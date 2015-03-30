@@ -17,7 +17,7 @@
 
 var React = require('react-native');
 var Account = require('./Account');
-var Cart = require('./Cart');
+var Cart = require('./Item');
 var Home = require('./Home');
 var Discover = require('./Discover');
 

@@ -1,6 +1,6 @@
 var React = require('react-native');
 var Separator = require('./Separator');
-
+var Item = require('./Item');
 var {
   Text,
   View,
@@ -61,14 +61,6 @@ var styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 4,
         color: '#aaaaaa'
-    }
-});
-
-var Item = React.createClass({
-    render: function(){
-        return <View>
-
-        </View>
     }
 });
 
@@ -152,7 +144,16 @@ module.exports = React.createClass({
     this.props.navigator.push({
       title: item.title,
       component: Item,
-      passProps: {}
+      passProps: {
+        id: item.item_id,
+        pic: item.pic_path.replace('_60x60.jpg', '_600x600.jpg'),
+        title: item.title,
+        sold: item.sold,
+        shipping: item.shipping,
+        location: item.location,
+        price: item.price,
+        priceWap: item.priceWap,
+      }
     });
   },
 

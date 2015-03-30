@@ -16,6 +16,7 @@
 'use strict';
 
 var React = require('react-native');
+var Carousel = require('./Carousel');
 var Button = require('./Button');
 var Separator = require('./Separator');
 
@@ -28,8 +29,10 @@ var {
 } = React;
 
 module.exports = React.createClass({
+  propTypes: {
 
-  renderBar: function(){
+  },
+  renderBar (){
 
     return (
         <View style={styles.bar}>
@@ -57,14 +60,63 @@ module.exports = React.createClass({
         )
   },
 
-  renderItem: function(){
-       return (
-          <ScrollView></ScrollView>
-           )
+  getInitialState () {
+    return {
+      data: null,
+      loaded: false,
+    }
   },
-    //<Button style={styles.wwBtn} icon={require('image!ww')}>客服</Button>
-    //<Button style={styles.favBtn} icon={require('image!fav')}>收藏</Button>
-  render: function() {
+  componentDidMount () {
+    this.fetchData();
+  },
+  fetchData () {
+    fetch('http://hws.m.taobao.com/cache/wdetail/5.0/?id=' + (this.props.id || 44141651091) )
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          data: responseData.data,
+          loaded: true
+        });
+      })
+      .done();
+  },
+  renderCarsousel(pics){
+
+      var images = pics.map(function(uri, i){
+          return <Image key={i} style={styles.page} source={{uri: uri}}/>
+      });
+
+      return <View style={{height: 375}}>
+          <Carousel>
+          {images}
+          </Carousel>
+      </View>
+  },
+
+  renderItem (){
+
+    if(!this.state.loaded){
+      return(
+        <View style={styles.container}>
+        <Text style={styles.loadingText}>
+            努力加载中...
+        </Text>
+      </View>
+      );
+    }else{
+      var data = this.state.data;
+      var itemInfo = data.itemInfoModel;
+
+      return (
+         <ScrollView>
+           {this.renderCarsousel(itemInfo.picsPath)}
+         </ScrollView>
+      )
+    }
+
+  },
+
+  render () {
 
     return (
       <View style={[styles.container]}>
@@ -81,18 +133,25 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  page: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 375,
+      height: 375,
+      resizeMode: Image.resizeMode.contain
+  },
   bar: {
-            position: 'absolute',
-            bottom: 50,
-            left: 0,
-            right:0,
-            flexDirection: 'column',
+    position: 'absolute',
+    bottom: 50,
+    left: 0,
+    right:0,
+    flexDirection: 'column',
   },
   barContent: {
 
      flexDirection: 'row',
   },
-  wwBtn: {  
+  wwBtn: {
     width: 20,
     height: 20,
     //resizeMode: Image.resizeMode.contain
@@ -102,24 +161,24 @@ var styles = StyleSheet.create({
     height: 20,
     //resizeMode: Image.resizeMode.contain
   },
-    smallText: {
-        fontFamily: 'Helvetica',
-        fontSize: 10,
-        marginTop: 4,
-        fontWeight: 'normal',
-        color: '#666666',
-        backgroundColor: 'transparent',
-    },
+  smallText: {
+      fontFamily: 'Helvetica',
+      fontSize: 10,
+      marginTop: 4,
+      fontWeight: 'normal',
+      color: '#666666',
+      backgroundColor: 'transparent',
+  },
   cartBtn: {
     height: 40,
-    lineHeight: 30,   
+    lineHeight: 30,
     flex: 3,
     backgroundColor:'#FF9402',
     color: 'white'
   },
   buyBtn: {
-    height: 40, 
-    lineHeight: 30,  
+    height: 40,
+    lineHeight: 30,
     flex: 3,
     backgroundColor:'#FF5000',
     color: 'white'
