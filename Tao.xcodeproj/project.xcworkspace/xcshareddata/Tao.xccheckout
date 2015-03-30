@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>91C5404C-9AAA-4F7F-A2A2-EC2A1862B648</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tao</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F710ADF25DF9FB04277B208EC05814ABB4211378</key>
+		<string>github.com:yuanyan/react-native-generator.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tao.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F710ADF25DF9FB04277B208EC05814ABB4211378</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:yuanyan/react-native-generator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F710ADF25DF9FB04277B208EC05814ABB4211378</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F710ADF25DF9FB04277B208EC05814ABB4211378</string>
+			<key>IDESourceControlWCCName</key>
+			<string>react-native-generator</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -36,11 +36,10 @@ var Button = React.createClass({
     var button;
     if(this.props.icon){
        button = (
-           <Image source={this.props.icon} style={this.props.style}>
-             <Text style={[styles.smallText, buttonStateStyle]}>
-                {this.props.children}
-             </Text>
-           </Image>)
+           <View style={ [{flexDirection: 'column'}, this.props.style]}>
+            <Image source={this.props.icon} style={{flex:1}}/>
+            <Text style={[styles.smallText, buttonStateStyle]}>{this.props.children}</Text>
+           </View>)
     }else{
        button = (
         <Text style={[styles.text, buttonStateStyle, this.props.style]}>
@@ -82,6 +81,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginLeft: 12,
     marginTop: 20,
+    flex: 1
   },
   disabledText: {
     color: '#dcdcdc',

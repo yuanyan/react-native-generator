@@ -6,70 +6,107 @@ var {
     View,
     Text,
     ScrollView,
-    } = React;
+} = React;
 
 var Carousel = React.createClass({
 
     getDefaultProps() {
-    return {
-        width: 375,
-        indicatorColor: '#000000',
-        inactiveIndicatorColor: '#999999'
-    }
-},
+        return {
+            width: 375,
+            indicatorColor: '#ff4400',
+            inactiveIndicatorColor: '#ffffff'
+        }
+    },
 
-getInitialState() {
-    return {
-        activePage: 0
-    }
-},
+    getInitialState() {
+        return {
+            currentX: 0,
+            activePage: 0
+        }
+    },
 
-render() {
+    start(){
 
-    return (
-        <View style={{ flex: 1 }}>
-            <ScrollView
-            contentContainerStyle={styles.container}
-            automaticallyAdjustContentInsets={false}
-            horizontal={true}
-            pagingEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            onMomentumScrollEnd={this.onAnimationEnd}
-            >
-          {this.props.children}
-            </ScrollView>
-        {this.renderPageIndicator()}
-        </View>
-        );
-},
+        var scrollView = this.refs.scrollView;
+        var length = this.props.children.length;
+        var self = this;
 
-renderPageIndicator() {
-    var indicators = [],
-        style, position;
+        setInterval(function(){
 
-    position = {
-        width: this.props.children.length * 15,
-    };
-    position.left = (this.props.width - position.width) / 2;
+            var activePage;
 
-    for (var i=0; i< this.props.children.length; i++) {
-        style = i === this.state.activePage ? { color: this.props.indicatorColor } : { color: this.props.inactiveIndicatorColor };
-        indicators.push(<Text style={style}>&bull;</Text>)
-    }
+            if( (self.state.activePage + 1)  >= length){
+                activePage = 0;
+            }else{
+                activePage = self.state.activePage + 1;
+            }
 
-    return (
-        <View style={[styles.pageIndicator, position]}>
-        {indicators}
-        </View>
+            var currentX = self.props.width * activePage;
+            scrollView.scrollResponderScrollTo(currentX, 0);
+
+            self.setState({
+                currentX: currentX,
+                activePage: activePage
+            });
+
+        }, 4000)
+    },
+
+    componentDidMount(){
+        this.start()
+    },
+
+    render() {
+
+        return (
+            <View style={this.props.style}>
+                <ScrollView
+                    ref='scrollView'
+                    contentContainerStyle={styles.container}
+                    automaticallyAdjustContentInsets={false}
+                    horizontal={true}
+                    pagingEnabled={true}
+                    showsHorizontalScrollIndicator={false}
+                    onMomentumScrollEnd={this.onAnimationEnd}
+                >
+                    {this.props.children}
+                </ScrollView>
+                {this.renderPageIndicator()}
+            </View>
+            );
+    },
+
+    renderPageIndicator() {
+        var indicators = [],
+            style,
+            position;
+
+        position = {
+            width: this.props.children.length * 15,
+        };
+
+        position.left = (this.props.width - position.width) / 2;
+
+        for (var i=0; i< this.props.children.length; i++) {
+            style = i === this.state.activePage ? { color: this.props.indicatorColor } : { color: this.props.inactiveIndicatorColor };
+            indicators.push(<Text key={i} style={[style, {fontSize: 32}]}>&bull;</Text>)
+        }
+
+        return (
+            <View style={[styles.pageIndicator, position]}>
+            {indicators}
+            </View>
         )
-},
+    },
 
-onAnimationEnd(e) {
-    var activePage = e.nativeEvent.contentOffset.x / this.props.width;
-    this.setState({
-        activePage: activePage
-    });
-}
+    onAnimationEnd(e) {
+        var activePage = e.nativeEvent.contentOffset.x / this.props.width;
+        // console.log(e.nativeEvent)
+        this.setState({
+            currentX: e.nativeEvent.contentOffset.x,
+            activePage: activePage
+        });
+    }
 });
 
 var styles = StyleSheet.create({
@@ -77,18 +114,14 @@ var styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    page: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-    },
+
     pageIndicator: {
-        position: 'absolute',
-        flexDirection: 'row',
         flex: 1,
-        bottom: 20,
+        flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        marginTop: -30,
+        alignItems: 'center',
+        backgroundColor: 'transparent',
     },
 });
 

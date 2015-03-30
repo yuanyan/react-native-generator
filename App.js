@@ -26,6 +26,7 @@ var {
   Image,
   TabBarIOS,
   Text,
+  StatusBarIOS,
   View,
 } = React;
 var TabBarItemIOS = TabBarIOS.Item;
@@ -33,11 +34,15 @@ var TabBarItemIOS = TabBarIOS.Item;
 var TaoApp = React.createClass({
 
   getInitialState: function() {
-    return {
+      StatusBarIOS.setStyle(StatusBarIOS.Style.lightContent);
+
+      return {
       selectedTab: 'home',
       notifCount: 0
     };
   },
+
+
 
   render: function() {
 
@@ -52,13 +57,16 @@ var TaoApp = React.createClass({
           accessibilityLabel="首页"
           selected={this.state.selectedTab === 'home'}
           onPress={() => {
+
             this.setState({
               selectedTab: 'home'
             });
+
+            StatusBarIOS.setStyle(StatusBarIOS.Style.lightContent);
           }}>
           <Home/>
         </TabBarItemIOS>
-          
+
         <TabBarItemIOS
           accessibilityLabel="发现"
           name="discover"
@@ -67,10 +75,14 @@ var TaoApp = React.createClass({
           badgeValue={this.state.notifCount ? String(this.state.notifCount) : null}
           selected={this.state.selectedTab === 'discover'}
           onPress={() => {
+
             this.setState({
               selectedTab: 'discover',
               notifCount: this.state.notifCount,
             });
+
+            StatusBarIOS.setStyle(StatusBarIOS.Style.default);
+
           }}>
           <Discover/>
         </TabBarItemIOS>
@@ -83,6 +95,7 @@ var TaoApp = React.createClass({
           badgeValue={this.state.notifCount ? String(this.state.notifCount) : null}
           selected={this.state.selectedTab === 'cart'}
           onPress={() => {
+            StatusBarIOS.setStyle(StatusBarIOS.Style.default);
             this.setState({
               selectedTab: 'cart',
               notifCount: this.state.notifCount,
@@ -99,6 +112,7 @@ var TaoApp = React.createClass({
           accessibilityLabel="我的淘宝"
           selected={this.state.selectedTab === 'account'}
           onPress={() => {
+            StatusBarIOS.setStyle(StatusBarIOS.Style.default);
             this.setState({
               selectedTab: 'account'
             });
@@ -115,10 +129,6 @@ var styles = StyleSheet.create({
   tabContent: {
     flex: 1,
     alignItems: 'center',
-  },
-  tabText: {
-    color: 'white',
-    margin: 50,
   },
   img: {
     width: 64,

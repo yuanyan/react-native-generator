@@ -26,7 +26,7 @@ var {
 module.exports = React.createClass({
 
   componentWillMount(){
-    StatusBarIOS.setStyle(StatusBarIOS.Style.default);
+
   },
   render() {
     return (

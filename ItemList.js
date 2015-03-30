@@ -1,4 +1,5 @@
 var React = require('react-native');
+var Separator = require('./Separator');
 
 var {
   Text,
@@ -60,11 +61,7 @@ var styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 4,
         color: '#aaaaaa'
-    },
-    separator: {
-        height: 0.5,
-        backgroundColor: '#CCCCCC',
-    },
+    }
 });
 
 var Item = React.createClass({
@@ -93,7 +90,7 @@ var ItemCell = React.createClass({
                         <Text style={styles.itemSold}>
                         {item.sold}人付款 {item.location}
                         </Text>
-                        <View style={styles.separator}/>
+                        <Separator/>
                     </View>
                 </View>
             </TouchableOpacity>
