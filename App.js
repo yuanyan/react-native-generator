@@ -31,7 +31,7 @@ var {
 } = React;
 var TabBarItemIOS = TabBarIOS.Item;
 
-var TaoApp = React.createClass({
+module.exports = React.createClass({
 
   getInitialState: function() {
       StatusBarIOS.setStyle(StatusBarIOS.Style.lightContent);
@@ -135,5 +135,3 @@ var styles = StyleSheet.create({
     height: 64,
   },
 });
-
-module.exports = TaoApp;
